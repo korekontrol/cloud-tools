@@ -18,8 +18,9 @@ options.
     ct [global options] command [command options] [arguments...]
 
     ct [global options] dns  domain-list
-    ct [global options] dns [-t type|--record-type type] record-create fqdn value
-    ct [global options] dns [-f|--force] record-delete fqdn
+    ct [global options] dns [-t type|--record-type type] record-create <fqdn> <value>
+    ct [global options] dns [-f|--force] record-delete <fqdn>
+    ct [global options] dns  record-list <domain>
 ```    
 
 ### License
