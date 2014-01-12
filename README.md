@@ -4,7 +4,10 @@ cloud-tools
 A set of utilities for controlling cloud resources via API. All calls are made
 by interface mechanism offered by Fog, therefore is *cloud-independent*.
 
-Currently, cod has been tested with Rackspace Cloud UK only. Further feedback welcome
+Current code has been tested with Rackspace Cloud UK only. Further feedback welcome.
+
+Tools are in development status and offered functionality is still very limited. At the moment
+only DNS commands are implemented. Compute calls will follow.
 
 ### Configuration
 Code ships with `config-sample.yml` file. Save it as config.yml and provide cloud credentials.
