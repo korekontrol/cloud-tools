@@ -1,0 +1,124 @@
+#!/usr/bin/env ruby
+
+### Setup local library path
+$APPLICATION_ROOT = File.expand_path(File.dirname(__FILE__))
+$LOAD_PATH << $APPLICATION_ROOT + "/lib"
+
+### Load gems and libraries
+require 'json'
+require 'yaml'
+require 'fog'
+require 'gli'
+require 'config.rb'
+require 'fog_gateway.rb'
+
+### Begin Application
+include GLI::App
+program_desc 'Cloud tools'
+
+### Global parameters
+flag [:c,:config_file], :default_value => File.join($APPLICATION_ROOT,'config.yml')
+
+### Bootstrap - load configuration, prepare cloud gateway
+pre do |global_options,command,options,args|
+  config = YAML::load(File.open(global_options[:config_file]))
+  $fog = FogGateway.new(config)
+end
+
+### Commands
+
+## dns
+desc "Manage DNS"
+command :dns do |c|
+
+  ##
+  c.desc "List available domains"
+  c.command "domain-list", "list" do |list|
+    list.action do |global_options, options, args|
+      puts "### DNS LIST: #{options} #{args}"
+      $fog.dns.zones.each do |zone|
+        puts zone.domain
+      end
+    end
+  end
+
+  ## dns record-create <fqdn> <value>
+  c.arg_name "fqdn value"
+  c.desc "Create DNS record"
+  c.command "record-create", "create" do |create|
+
+    create.desc "DNS record type"
+    create.arg_name "type"
+    create.flag "t","record-type", :default_value => "A"
+
+    create.desc "force overwrite existing record (if exists)"
+    create.switch "f","force"
+
+    create.action do |global_options, options, args|
+      puts "### DNS RECORD-CREATE: #{options} #{args}"
+      type = options[:t].upcase
+      help_now!("Missing FQDN") if (fqdn=args[0]).nil?
+      help_now!("Missing Value") if (value=args[1]).nil?
+      fqdn_splitted = fqdn.split('.')
+      domain = fqdn_splitted[1..fqdn_splitted.size].join('.')
+      zone = $fog.dns.zones.select { |zone| zone.domain == domain }.first
+      exit_now!("Domain #{domain} not found!") if zone.nil?
+      if existing_record = zone.records.find { |record| record.name == fqdn }
+        exit_now!("Record #{fqdn} already exists and --force not used!") unless options[:force]
+        existing_record.destroy
+        status = "updated"
+      else
+        status = "created"
+      end
+      zone.records.create(:name => fqdn, :type => type, :value => value)
+      puts "#{status}: #{fqdn} IN #{type} #{value}"
+    end
+  end
+
+  ##
+  c.arg_name "fqdn"
+  c.desc "Delete DNS record"
+  c.command "record-delete", "delete" do |delete|
+
+    delete.desc "don't return error if record does not exist"
+    delete.switch "f","force"
+
+    delete.action do |global_options, options, args|
+      help_now!("Missing FQDN") if (fqdn=args[0]).nil?
+      fqdn_splitted = fqdn.split('.')
+      domain = fqdn_splitted[1..fqdn_splitted.size].join('.')
+      zone = $fog.dns.zones.select { |zone| zone.domain == domain }.first
+      exit_now!("Domain #{domain} not found!") if zone.nil?
+      if existing_record = zone.records.find { |record| record.name == fqdn }
+        existing_record.destroy
+        status = "deleted"
+      else
+        exit_now!("DNS record #{fqdn} not found!") unless options[:force]
+        status = "not-found"
+      end
+      puts "#{status}: #{fqdn}"
+    end
+  end
+
+  ##
+  c.arg_name "domain"
+  c.desc "List DNS records for a domain"
+  c.command "record-list" do |list|
+
+    list.action do |global_options, options, args|
+      help_now!("Missing domain") if (domain=args[0]).nil?
+      zone = $fog.dns.zones.select { |zone| zone.domain == domain }.first
+      exit_now!("Domain #{domain} not found!") if zone.nil?
+      zone.records.each do |record|
+        puts "#{record.name}: #{record.type} #{record.value}"
+      end
+    end
+  end
+
+
+end
+
+### Finish definitions, run applications
+
+exit run(ARGV)
+

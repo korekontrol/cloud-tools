@@ -1,0 +1,20 @@
+providers:
+  compute:
+    # Sample configuration for AWS
+    provider: AWS
+    aws_access_key_id: fixme
+    aws_secret_access_key: fixme
+  storage:
+    # Sample configuration for rackspace (US)
+    provider: Rackspace
+    rackspace_username: fixme
+    rackspace_api_key: fixme
+    rackspace_region: dfw
+  dns:
+    # Sample configuration for rackspace (UK)
+    provider: Rackspace
+    rackspace_username: fixme
+    rackspace_api_key: fixme
+    rackspace_region: lon
+    rackspace_auth_url: 'https://lon.identity.api.rackspacecloud.com/v2.0'
+
