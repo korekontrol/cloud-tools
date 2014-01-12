@@ -34,4 +34,4 @@ OBJECT STORAGE API
 ```    
 
 ### License
-See [LICENSE](../blob/master/LICENSE) file.
+See [LICENSE](../master/LICENSE) file.
