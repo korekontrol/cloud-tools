@@ -18,13 +18,20 @@ options.
 
 ### Synopsis
 ```
-    ct [global options] command [command options] [arguments...]
+GLOBAL SYNTAX
+    ct [global options] <command> [command options] [arguments...]
 
+DNS API
     ct [global options] dns  domain-list
     ct [global options] dns [-t type|--record-type type] record-create <fqdn> <value>
     ct [global options] dns [-f|--force] record-delete <fqdn>
     ct [global options] dns  record-list <domain>
+
+COMPUTE API
+
+OBJECT STORAGE API
+
 ```    
 
 ### License
-See LICENSE file
+See [LICENSE](../blob/master/LICENSE) file.
