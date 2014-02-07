@@ -12,11 +12,11 @@ if [ ! -f /root/.ssh/authorized_keys ]; then
   echo "$key" > /root/.ssh/authorized_keys
 fi
 
-# Prepare apt repositories
+# Prepare apt repositories, install packages
 echo "deb http://debian.saltstack.com/debian wheezy-saltstack main" > /etc/apt/sources.list.d/saltstack.list
 wget -q -O- "http://debian.saltstack.com/debian-salt-team-joehealy.gpg.key" | apt-key add -
 apt-get -qq update
-apt-get -qq install salt-master
+apt-get -qq install salt-master python-pip
 
 # Create code directory
 mkdir -p /srv/salt
@@ -25,4 +25,25 @@ mkdir -p /srv/salt
 ufw allow 4505/tcp
 ufw allow 4506/tcp
 
+# Install python extensions for rackspace cloud
+pip -q install rackspace-novaclient salt-cloud apache_libcloud
+
+# Prepare for cloud credentials
+mkdir /etc/salt/cloud.providers.d
+[ -f /etc/salt/cloud.providers.d/rackspace.conf ] || cat > /etc/salt/cloud.providers.d/rackspace.conf << EOF
+marconi-test:
+  minion:
+    master: <IP address of salt master>
+
+  identity_url: 'https://lon.identity.api.rackspacecloud.com/v2.0/tokens'
+  compute_name: cloudServersOpenStack
+  protocol: ipv4
+
+  compute_region: LON
+
+  user: <username>
+  apikey: <API key>
+
+provider: openstack
+EOF
 
