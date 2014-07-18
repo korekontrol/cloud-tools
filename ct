@@ -27,6 +27,52 @@ end
 
 ### Commands
 
+## lbaas
+desc "Manage Rackspace LoadBalancers"
+command :lb do |c|
+  ##
+  c.desc "List"
+  c.command "list" do |list|
+    list.action do |global_options, options, args|
+      puts "### LB LIST: #{options} #{args}"
+      $fog.rackspace_loadbalancer.load_balancers.each do |lb|
+        ip = lb.virtual_ips.find { |a| a.ip_version=='IPV4' }.address
+        puts "  - #{lb.name}: #{lb.protocol}://#{ip}:#{lb.port}"
+      end
+    end
+  end
+
+  c.arg_name "name"
+  c.desc "Show details"
+  c.command "show" do |show|
+    show.action do |global_options, options, args|
+      puts "### LB SHOW: #{options} #{args}"
+      help_now!("Missing LoadBalancer name") if (lb_name=args[0]).nil?
+      lb = $fog.rackspace_loadbalancer.load_balancers.find do |lb|
+        lb.name == lb_name
+      end
+      exit_now!("Loadbalancer #{lb_name} not found!") unless lb
+
+      ip = lb.virtual_ips.find { |a| a.ip_version=='IPV4' }.address
+      puts "#{lb.name}:"
+      puts "  address: #{ip}"
+      puts "  port: #{lb.port}"
+      puts "  protocol: #{lb.protocol}"
+      puts "  algorithm: #{lb.algorithm}"
+      puts "  nodes:"
+      lb.nodes.each do |node|
+        puts "    #{node.address}:"
+        puts "      port: #{node.port}"
+        puts "      condition: #{node.condition}"
+        puts "      status: #{node.status}"
+        puts "      weight: #{node.weight}"
+      end
+
+    end
+  end
+
+end
+
 ## dns
 desc "Manage DNS"
 command :dns do |c|

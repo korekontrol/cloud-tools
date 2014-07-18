@@ -1,8 +1,10 @@
 cloud-tools
 ===========
 
-A set of utilities for controlling cloud resources via API. All calls are made
-by interface mechanism offered by Fog, therefore is *cloud-independent*.
+
+A set of utilities by <a href="https://www.korekontrol.eu/">Marek Obuchowicz, KoreKontrol</a>
+for controlling cloud resources via API. All calls are made by interface
+mechanism offered by Fog gem, therefore is *cloud-independent*.
 
 Current code has been tested with Rackspace Cloud UK only. Further feedback welcome.
 
@@ -27,11 +29,17 @@ DNS API
     ct [global options] dns [-f|--force] record-delete <fqdn>
     ct [global options] dns  record-list <domain>
 
+LOADBALANCER API (Rackspace only at the moment)
+    ct [global options] lb  list
+    ct [global options] lb  show <lb_name>
+
 COMPUTE API
 
 OBJECT STORAGE API
 
-```    
+DATABASE API
+
+```
 
 ### License
 See [LICENSE](../master/LICENSE) file.
