@@ -19,7 +19,7 @@ GEM
     mime-types (2.0)
     mini_portile (0.5.2)
     multi_json (1.8.4)
-    net-scp (1.1.2)
+    net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
     nokogiri (1.6.1)
@@ -33,5 +33,8 @@ DEPENDENCIES
   fog (= 1.19.0)
   gli
   highline (= 1.6.20)
-  net-scp (= 1.1.2)
+  net-scp (= 1.2.1)
   net-ssh (= 2.7.0)
+
+BUNDLED WITH
+  4.0.19
