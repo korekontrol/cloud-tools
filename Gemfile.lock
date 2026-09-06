@@ -15,7 +15,7 @@ GEM
       ruby-hmac
     formatador (0.2.4)
     gli (2.8.1)
-    highline (1.6.20)
+    highline (1.7.10)
     mime-types (2.0)
     mini_portile (0.5.2)
     multi_json (1.8.4)
@@ -32,6 +32,9 @@ PLATFORMS
 DEPENDENCIES
   fog (= 1.19.0)
   gli
-  highline (= 1.6.20)
+  highline (= 1.7.10)
   net-scp (= 1.1.2)
   net-ssh (= 2.7.0)
+
+BUNDLED WITH
+  4.0.20
