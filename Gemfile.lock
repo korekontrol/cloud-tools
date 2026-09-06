@@ -14,7 +14,8 @@ GEM
       nokogiri (~> 1.5)
       ruby-hmac
     formatador (0.2.4)
-    gli (2.8.1)
+    gli (2.22.2)
+      ostruct
     highline (1.6.20)
     mime-types (2.0)
     mini_portile (0.5.2)
@@ -24,6 +25,7 @@ GEM
     net-ssh (2.7.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    ostruct (0.6.3)
     ruby-hmac (0.4.0)
 
 PLATFORMS
@@ -35,3 +37,6 @@ DEPENDENCIES
   highline (= 1.6.20)
   net-scp (= 1.1.2)
   net-ssh (= 2.7.0)
+
+BUNDLED WITH
+  4.0.20
