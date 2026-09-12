@@ -1,37 +1,335 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    builder (3.2.2)
-    excon (0.31.0)
-    fog (1.19.0)
+    CFPropertyList (2.3.6)
+    activesupport (8.1.3.1)
+      base64
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.3.1)
+      connection_pool (>= 2.2.5)
+      drb
+      i18n (>= 1.6, < 2)
+      json
+      logger (>= 1.4.2)
+      minitest (>= 5.1)
+      securerandom (>= 0.3)
+      tzinfo (~> 2.0, >= 2.0.5)
+      uri (>= 0.13.1)
+    addressable (2.9.0)
+      public_suffix (>= 2.0.2, < 8.0)
+    aliyun-sdk (0.8.0)
+      nokogiri (~> 1.6)
+      rest-client (~> 2.0)
+    base64 (0.3.0)
+    bigdecimal (4.1.2)
+    builder (3.3.0)
+    concurrent-ruby (1.3.8)
+    connection_pool (3.0.2)
+    declarative (0.0.20)
+    domain_name (0.6.20260907)
+    drb (2.2.3)
+    dry-inflector (1.3.1)
+    excon (1.7.1)
+      logger
+    faraday (2.14.3)
+      faraday-net_http (>= 2.0, < 3.5)
+      json
+      logger
+    faraday-follow_redirects (0.5.0)
+      faraday (>= 1, < 3)
+    faraday-net_http (3.4.4)
+      net-http (~> 0.5)
+    fission (0.5.0)
+      CFPropertyList (~> 2.2)
+    fog (2.3.0)
+      fog-aliyun (>= 0.1.0)
+      fog-atmos
+      fog-aws (>= 0.6.0)
+      fog-brightbox (>= 0.4, < 2.0)
+      fog-cloudatcost (~> 0.4)
+      fog-cloudstack (~> 0.1.0)
+      fog-core (~> 2.1)
+      fog-digitalocean (>= 0.3.0)
+      fog-dnsimple (~> 2.1)
+      fog-dynect (>= 0.0.2, < 0.6.0)
+      fog-ecloud (~> 0.1)
+      fog-google (~> 1.0)
+      fog-internet-archive
+      fog-json
+      fog-local
+      fog-openstack
+      fog-ovirt
+      fog-powerdns (>= 0.1.1)
+      fog-profitbricks
+      fog-rackspace
+      fog-radosgw (>= 0.0.2)
+      fog-riakcs
+      fog-sakuracloud (>= 0.0.4)
+      fog-serverlove
+      fog-softlayer
+      fog-storm_on_demand
+      fog-terremark
+      fog-vmfusion
+      fog-voxel
+      fog-vsphere (>= 0.4.0)
+      fog-xenserver
+      fog-xml (~> 0.1.1)
+      ipaddress (~> 0.5)
+      json (~> 2.3)
+    fog-aliyun (0.4.1)
+      addressable (>= 2.8, < 2.10)
+      aliyun-sdk (~> 0.8.0)
+      fog-core
+      fog-json
+      ipaddress (~> 0.8)
+      xml-simple (~> 1.1)
+    fog-atmos (0.1.0)
+      fog-core
+      fog-xml
+    fog-aws (3.33.3)
+      base64 (>= 0.2, < 0.4)
+      fog-core (~> 2.6)
+      fog-json (~> 1.1)
+      fog-xml (~> 0.1)
+    fog-brightbox (1.12.0)
+      dry-inflector
+      fog-core (>= 1.45, < 3.0)
+      fog-json
+    fog-cloudatcost (0.4.0)
+      fog-core
+      fog-json
+      ipaddress
+    fog-cloudstack (0.1.0)
+      fog-core (~> 2.1)
+      fog-json (~> 1.1)
+      fog-xml (~> 0.1)
+    fog-core (2.6.0)
       builder
-      excon (~> 0.31.0)
-      formatador (~> 0.2.0)
+      excon (~> 1.0)
+      formatador (>= 0.2, < 2.0)
       mime-types
-      multi_json (~> 1.0)
-      net-scp (~> 1.1)
-      net-ssh (>= 2.1.3)
-      nokogiri (~> 1.5)
-      ruby-hmac
-    formatador (0.2.4)
+    fog-digitalocean (0.4.0)
+      fog-core
+      fog-json
+      fog-xml
+      ipaddress (>= 0.5)
+    fog-dnsimple (2.1.0)
+      fog-core (>= 1.38, < 3)
+      fog-json
+    fog-dynect (0.5.0)
+      fog-core
+      fog-json
+      fog-xml
+    fog-ecloud (0.3.0)
+      fog-core
+      fog-xml
+    fog-google (1.29.4)
+      addressable (>= 2.7.0)
+      fog-core (~> 2.5)
+      fog-json (~> 1.2)
+      fog-xml (~> 0.1.0)
+      google-apis-compute_v1 (~> 0.53)
+      google-apis-dns_v1 (~> 0.28)
+      google-apis-iamcredentials_v1 (~> 0.15)
+      google-apis-monitoring_v3 (~> 0.37)
+      google-apis-pubsub_v1 (~> 0.30)
+      google-apis-sqladmin_v1beta4 (~> 0.38)
+      google-apis-storage_v1 (>= 0.19, < 1)
+      google-cloud-env (>= 1.2, < 3.0)
+    fog-internet-archive (0.0.2)
+      fog-core
+      fog-json
+      fog-xml
+    fog-json (1.4.0)
+      fog-core
+      json (~> 2.19)
+    fog-local (0.9.0)
+      fog-core (>= 1.27, < 3.0)
+    fog-openstack (1.1.5)
+      fog-core (~> 2.1)
+      fog-json (>= 1.0)
+    fog-ovirt (2.0.3)
+      activesupport
+      fog-core
+      fog-json
+      fog-xml
+      ovirt-engine-sdk (>= 4.3.1)
+    fog-powerdns (0.2.1)
+      fog-core
+      fog-json
+      fog-xml
+    fog-profitbricks (0.0.5)
+      fog-core
+      fog-xml
+      nokogiri
+    fog-rackspace (0.1.6)
+      fog-core (>= 1.35)
+      fog-json (>= 1.0)
+      fog-xml (>= 0.1)
+      ipaddress (>= 0.8)
+    fog-radosgw (0.0.5)
+      fog-core (>= 1.21.0)
+      fog-json
+      fog-xml (>= 0.0.1)
+    fog-riakcs (0.1.0)
+      fog-core
+      fog-json
+      fog-xml
+    fog-sakuracloud (1.7.5)
+      fog-core
+      fog-json
+    fog-serverlove (0.1.2)
+      fog-core
+      fog-json
+    fog-softlayer (1.1.4)
+      fog-core
+      fog-json
+    fog-storm_on_demand (0.1.1)
+      fog-core
+      fog-json
+    fog-terremark (0.1.0)
+      fog-core
+      fog-xml
+    fog-vmfusion (0.1.0)
+      fission
+      fog-core
+    fog-voxel (0.1.0)
+      fog-core
+      fog-xml
+    fog-vsphere (3.7.3)
+      base64
+      fog-core
+      ostruct
+      rbvmomi2 (~> 3.0)
+    fog-xenserver (1.0.0)
+      fog-core
+      fog-xml
+      xmlrpc
+    fog-xml (0.1.5)
+      fog-core
+      nokogiri (>= 1.5.11, < 2.0.0)
+    formatador (1.2.3)
+      reline
     gli (2.8.1)
+    google-apis-compute_v1 (0.154.0)
+      google-apis-core (>= 0.15.0, < 2.a)
+    google-apis-core (1.2.5)
+      addressable (~> 2.9)
+      faraday (~> 2.13)
+      faraday-follow_redirects (~> 0.3)
+      googleauth (~> 1.14)
+      mini_mime (~> 1.1)
+      multi_json (~> 1.11)
+      representable (~> 3.0)
+      retriable (>= 3.1, < 5.0)
+    google-apis-dns_v1 (0.55.0)
+      google-apis-core (>= 0.15.0, < 2.a)
+    google-apis-iamcredentials_v1 (0.28.0)
+      google-apis-core (>= 0.15.0, < 2.a)
+    google-apis-monitoring_v3 (0.85.0)
+      google-apis-core (>= 0.15.0, < 2.a)
+    google-apis-pubsub_v1 (0.71.0)
+      google-apis-core (>= 0.15.0, < 2.a)
+    google-apis-sqladmin_v1beta4 (0.105.0)
+      google-apis-core (>= 0.15.0, < 2.a)
+    google-apis-storage_v1 (0.67.0)
+      google-apis-core (>= 0.15.0, < 2.a)
+    google-cloud-env (2.4.0)
+      base64 (~> 0.2)
+      faraday (>= 1.0, < 3.a)
+    google-logging-utils (0.2.0)
+    googleauth (1.17.4)
+      faraday (>= 1.0, < 3.a)
+      google-cloud-env (~> 2.2)
+      google-logging-utils (~> 0.1)
+      jwt (>= 1.4, < 4.0)
+      os (>= 0.9, < 2.0)
+      pstore (~> 0.1)
+      signet (>= 0.16, < 2.a)
     highline (1.6.20)
-    mime-types (2.0)
-    mini_portile (0.5.2)
-    multi_json (1.8.4)
+    http-accept (1.7.0)
+    http-cookie (1.1.6)
+      domain_name (~> 0.5)
+    i18n (1.15.2)
+      concurrent-ruby (~> 1.0)
+    io-console (0.9.2)
+    ipaddress (0.8.3)
+    json (2.21.2)
+    jwt (3.3.0)
+      base64
+    logger (1.7.0)
+    mime-types (3.7.0)
+      logger
+      mime-types-data (~> 3.2025, >= 3.2025.0507)
+    mime-types-data (3.2026.0701)
+    mini_mime (1.1.5)
+    mini_portile2 (2.8.9)
+    minitest (6.0.6)
+      drb (~> 2.0)
+      prism (~> 1.5)
+    multi_json (1.21.2)
+    net-http (0.9.1)
+      uri (>= 0.11.1)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
-    ruby-hmac (0.4.0)
+    netrc (0.11.0)
+    nokogiri (1.19.4)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
+    optimist (3.2.1)
+    os (1.1.4)
+    ostruct (0.6.3)
+    ovirt-engine-sdk (4.6.1)
+      json (>= 1, < 3)
+    prism (1.9.0)
+    pstore (0.2.1)
+    public_suffix (7.0.5)
+    racc (1.8.1)
+    rbvmomi2 (3.10.0)
+      builder (~> 3.2)
+      json (~> 2.3)
+      nokogiri (~> 1.12, >= 1.12.5)
+      optimist (~> 3.0)
+    reline (0.7.0)
+      io-console (~> 0.5)
+    representable (3.2.0)
+      declarative (< 0.1.0)
+      trailblazer-option (>= 0.1.1, < 0.2.0)
+      uber (< 0.2.0)
+    rest-client (2.1.0)
+      http-accept (>= 1.7.0, < 2.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
+    retriable (4.2.0)
+    rexml (3.4.4)
+    securerandom (0.4.1)
+    signet (0.22.0)
+      addressable (~> 2.8)
+      faraday (>= 0.17.5, < 3.a)
+      jwt (>= 1.5, < 4.0)
+    trailblazer-option (0.1.2)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
+    uber (0.1.0)
+    uri (1.1.1)
+    webrick (1.9.2)
+    xml-simple (1.1.9)
+      rexml
+    xmlrpc (0.3.4)
+      rexml
+      webrick
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  fog (= 1.19.0)
+  fog (= 2.3.0)
   gli
   highline (= 1.6.20)
   net-scp (= 1.1.2)
   net-ssh (= 2.7.0)
+
+BUNDLED WITH
+  4.0.20
